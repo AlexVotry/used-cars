@@ -10,11 +10,13 @@ export class ReportsService {
   constructor(@InjectRepository(Report) private repo: Repository<Report>) {}
 
   createEstimate({ make, model, lat, mileage }: GetEstimateDto) {
+    // Return average price of car with below criteria.
     return this.repo.createQueryBuilder()
       .select('AVG(price)', 'price')
       .where('make = :make', { make })
       .andWhere('model = :model', { model })
       .andWhere('lat - :lat BETWEEN -5 AND 5', { lat } )
+      .andWhere('approved IS TRUE')
       .orderBy('ABS(mileage - :mileage)', 'DESC')
       .setParameters({ mileage })
       .limit(3)
