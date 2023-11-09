@@ -1,0 +1,13 @@
+### create new car report
+POST http://localhost:3000/reports
+Content-Type: application/json
+
+{
+  "make": "Toyota",
+  "model": "Prius",
+  "year": 2018,
+  "mileage": 10000,
+  "long": 0,
+  "lat": 0,
+  "price": 23000
+}
