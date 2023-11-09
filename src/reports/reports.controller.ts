@@ -1,4 +1,4 @@
-import { Controller, Post, Get, Body, Param } from '@nestjs/common';
+import { Controller, Post, Get, Body, Param, Query } from '@nestjs/common';
 import { CreateReportDto } from './dtos/create-report.dto';
 import { ReportsService } from './reports.service';
 
@@ -6,6 +6,11 @@ import { ReportsService } from './reports.service';
 export class ReportsController {
   constructor(private reportSrv: ReportsService) {}
 
+  @Get()
+  getEstimate(@Query() query: GetEstimateDto) {
+    return this.reportSrv.createEstimate(query);
+  }
+  
   @Post()
   createReport(@Body() body: CreateReportDto) {
     return this.reportSrv.create(body);
